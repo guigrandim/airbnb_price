@@ -12,6 +12,8 @@
 - Este arquivo é a memória estática do projeto: mantenha-o com NO MÁXIMO 200 linhas.
 - Ao retomar, leia AGENTS.md, notebook, resultados salvos e decisão de aprovação mais recente.
 - Nunca invente números, colunas, fórmulas verificadas, saídas do kernel ou validações do usuário.
+- Para cada etapa, crie antes da implementação um plano em `docs/plans/plano-etapa-NN-<slug>.md`; registre objetivo, escopo, estratégia, premissas, células previstas, critérios de aceite e status.
+- Ao concluir ou interromper uma etapa, atualize seu plano com evidências, decisões, pendências e estado do gate; não antecipe implementação de etapas futuras.
 - Antes de codificar cada etapa, apresente objetivo, estratégia, premissas, células previstas e critérios de aceite.
 - Crie uma seção Markdown `## Etapa NN — ...` e subseções `### NN.x — Verificação ...` no notebook.
 - Desenvolva em pequenos blocos: insira 1–3 células, execute, inspecione saída, interprete e prossiga.
@@ -107,8 +109,8 @@
 
 ### Etapa 04 — EDA
 - 04.1 Univariada: faltantes, outliers, dispersão, assimetria e distribuição por variável.
-- 04.2 Bivariada: formular 5 hipóteses prioritárias de relação com `price`; testar e interpretar.
-- 04.3 Multivariada: correlação e dependência entre explicativas; avaliar multicolinearidade.
+- 04.2 Bivariada: formular 5 hipóteses prioritárias de relação com `price`; registrar a pergunta de negocio, a hipotese, testar e interpretar.
+- 04.3 Multivariada: correlação e dependência entre explicativas; avaliar multicolinearidade. Fazer das variaveis numéricas e categoricas
 - 04.4 Não chamar correlação entre variáveis de “autocorrelação”; não alegar causalidade.
 - 04.5 Fazer EDA com alvo apenas no treino; manter teste intacto para avaliação final.
 - GATE: aprovar hipóteses, achados e ressalvas.
@@ -139,9 +141,10 @@
 
 ### Etapa 08 — Fine Tuning
 - 08.1 Usar Optuna + Cross Validation apenas no conjunto de desenvolvimento.
-- 08.2 Colocar todo pré-processamento/seleção dependente do alvo dentro dos folds.
-- 08.3 Definir espaço de busca, número limitado de trials, seed, critério de parada e orçamento.
-- 08.4 Comparar ganho real sobre baseline não ajustado; não otimizar olhando o teste.
+- 08.2 Verificar a questão de um Fine Tuning Bayesiano
+- 08.3 Colocar todo pré-processamento/seleção dependente do alvo dentro dos folds.
+- 08.4 Definir espaço de busca, número limitado de trials, seed, critério de parada e orçamento.
+- 08.5 Comparar ganho real sobre baseline não ajustado; não otimizar olhando o teste.
 - GATE: aprovar hiperparâmetros e justificativa de custo-benefício.
 
 ### Etapa 09 — Métricas e Recomendador

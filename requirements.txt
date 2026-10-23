@@ -5,4 +5,7 @@ python-dotenv
 ruff
 tqdm
 typer
+# Dependências usadas para construir e manipular o dataset no notebook.
+numpy==2.2.6
+pandas==2.3.3
 -e .
