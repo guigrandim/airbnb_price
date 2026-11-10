@@ -1,12 +1,12 @@
-# Airbnb Price Prediction
+# Previsão de preços do Airbnb em Amsterdam
 
 <a target="_blank" href="https://cookiecutter-data-science.drivendata.org/">
     <img src="https://img.shields.io/badge/CCDS-Project%20template-328F97?logo=cookiecutter" />
 </a>
 
-Projeto de ciência de dados para análise e previsão de preços de imóveis do Airbnb.
+Modelo de regressão para estimar o preço anunciado por anúncio em Amsterdam no snapshot de 2018. MAPE é a métrica principal; o projeto não prevê preços para 2027.
 
-## Project Organization
+## Estrutura do projeto
 
 ```
 ├── LICENSE            <- Open-source license if one is chosen

@@ -1,12 +1,11 @@
-Generating the docs
-----------
+# Documentação do projeto
 
-Use [mkdocs](http://www.mkdocs.org/) structure to update the documentation. 
+O site usa [MkDocs](http://www.mkdocs.org/) e o conteúdo está em `docs/docs`.
 
-Build locally with:
+Para gerar o site:
 
     mkdocs build
 
-Serve locally with:
+Para visualizar localmente:
 
     mkdocs serve

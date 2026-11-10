@@ -1,10 +1,4 @@
-# Airbnb Price Prediction documentation!
+# Previsão de preços do Airbnb em Amsterdam
 
-## Description
-
-Projeto de ciência de dados para análise e previsão de preços de imóveis do Airbnb.
-
-## Commands
-
-The Makefile contains the central entry points for common tasks related to this project.
+Modelo de regressão para estimar preços anunciados por anúncio em Amsterdam com o snapshot do Inside Airbnb de 2018. MAPE é a métrica principal. A Etapa 03 aguarda aprovação antes da Etapa 04.
 
