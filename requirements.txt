@@ -14,4 +14,5 @@ scikit-learn==1.7.2
 xgboost==3.2.0
 lightgbm==4.7.0
 Boruta==0.4.3
+optuna==5.0.0
 -e .

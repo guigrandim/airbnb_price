@@ -1,6 +1,6 @@
 # Etapa 07 — Machine Learning
 
-**Status:** execução concluída; gate da Etapa 07 aguarda aprovação do usuário. O usuário autorizou iniciar a etapa em 09/11/2026.
+**Status:** execução concluída; gate aprovado pelo usuário em 10/11/2026. A Etapa 08 está autorizada.
 
 ## Objetivo
 
@@ -68,13 +68,13 @@ Cada bloco de código terá comentários em português. Inserirei no máximo 1�
 - Os cortes de preço definidos no treino foram €95, €125 e €175. O MAPE dos modelos explicativos foi 39%–44% no primeiro quartil; no quarto, 21%–25%, com MAE €83–€88 e viés negativo. O p99 de erro percentual absoluto excedeu 140% nos dois finalistas. Regressão linear e polinomial geraram 3 e 6 previsões não positivas na validação; não houve clipping ou exclusões adicionais.
 - A verificação final passou: 14 linhas de métricas globais, cobertura de 2.619 linhas por room_type e por faixa, previsões finitas, 40 features de entrada e df_modeling_features inalterado. O teste foi consultado apenas por existência/tamanho; nenhum modelo ou previsão foi salvo em disco.
 - Diagnóstico complementar executado antes do gate: o preço tem mediana €125 em ambas as partições, médias €147,90/€149,90 e KS D=0,0162 (p=0,6137). O maior SMD numérico foi 0,046; a maior distância de variação total categórica foi 4,52%; categorias inéditas na validação cobrem no máximo 0,23% das linhas. O gap de MAPE dos modelos de árvore persistiu nos quatro quartis comuns. O p99 do APE aumentou 33,22 p.p. no LightGBM, 45,08 p.p. na Random Forest e 58,03 p.p. no XGBoost, contra 3,55 p.p. na regressão linear e 9,51 p.p. na polinomial. A faixa mais cara manteve viés de subestimação; nenhum dado foi alterado.
-- A aprovação do gate da Etapa 07 continua pendente. O teste permanece reservado para a avaliação única da Etapa 09.
+- O usuário aprovou a Etapa 07 para avançar à Etapa 08 em 10/11/2026. O teste permanece reservado para a avaliação única da Etapa 09.
 
 ## Gate
 
-**Estado:** execução e verificações concluídas; aprovação do usuário pendente.
+**Estado:** aprovado pelo usuário em 10/11/2026; Etapa 08 autorizada.
 
-Perguntar literalmente: **“Você aprova a Etapa 07 para avançarmos à Etapa 08?”**
+Decisão registrada: **“Aprovo, pode seguir”** (10/11/2026).
 
 ## Diagnóstico complementar antes do gate
 
@@ -86,4 +86,4 @@ Perguntar literalmente: **“Você aprova a Etapa 07 para avançarmos à Etapa 0
 
 **Critérios de aceite:** as duas partições são comparadas sem usar o teste; os cortes vêm só do treino; a tabela de erros mostra ambos os conjuntos por faixa e nos percentis p95/p99; as maiores diferenças de distribuição são listadas e interpretadas com cautela; nenhuma linha ou feature é alterada.
 
-**Status:** diagnóstico executado via MCP; distribuição do alvo/features, erros por faixa, percentis p95/p99 e gate final inspecionados. O gate da Etapa 07 continua aguardando aprovação do usuário.
+**Status:** diagnóstico executado via MCP; distribuição do alvo/features, erros por faixa, percentis p95/p99 e gate final inspecionados. O gate da Etapa 07 foi aprovado pelo usuário em 10/11/2026.
