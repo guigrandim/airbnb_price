@@ -1,0 +1,90 @@
+{
+  "Bijlmer-Centrum": {
+    "latitude": 52.303618,
+    "longitude": 4.95158
+  },
+  "Bijlmer-Oost": {
+    "latitude": 52.320279,
+    "longitude": 4.977317
+  },
+  "Bos en Lommer": {
+    "latitude": 52.380498,
+    "longitude": 4.850515
+  },
+  "Buitenveldert - Zuidas": {
+    "latitude": 52.332006,
+    "longitude": 4.868025
+  },
+  "Centrum-Oost": {
+    "latitude": 52.367753,
+    "longitude": 4.908287
+  },
+  "Centrum-West": {
+    "latitude": 52.376426,
+    "longitude": 4.889084
+  },
+  "De Aker - Nieuw Sloten": {
+    "latitude": 52.341807,
+    "longitude": 4.809373
+  },
+  "De Baarsjes - Oud-West": {
+    "latitude": 52.366169,
+    "longitude": 4.86203
+  },
+  "De Pijp - Rivierenbuurt": {
+    "latitude": 52.346111,
+    "longitude": 4.8985
+  },
+  "Gaasperdam - Driemond": {
+    "latitude": 52.303315,
+    "longitude": 4.990531
+  },
+  "Geuzenveld - Slotermeer": {
+    "latitude": 52.379437,
+    "longitude": 4.801677
+  },
+  "IJburg - Zeeburgereiland": {
+    "latitude": 52.360899,
+    "longitude": 4.998377
+  },
+  "Noord-Oost": {
+    "latitude": 52.398339,
+    "longitude": 5.003523
+  },
+  "Noord-West": {
+    "latitude": 52.415306,
+    "longitude": 4.894589
+  },
+  "Oostelijk Havengebied - Indische Buurt": {
+    "latitude": 52.371412,
+    "longitude": 4.941492
+  },
+  "Osdorp": {
+    "latitude": 52.362883,
+    "longitude": 4.784457
+  },
+  "Oud-Noord": {
+    "latitude": 52.394068,
+    "longitude": 4.910489
+  },
+  "Oud-Oost": {
+    "latitude": 52.357795,
+    "longitude": 4.919954
+  },
+  "Slotervaart": {
+    "latitude": 52.357627,
+    "longitude": 4.83365
+  },
+  "Watergraafsmeer": {
+    "latitude": 52.342719,
+    "longitude": 4.931061
+  },
+  "Westerpark": {
+    "latitude": 52.386801,
+    "longitude": 4.874599
+  },
+  "Zuid": {
+    "latitude": 52.350398,
+    "longitude": 4.864704
+  }
+}
