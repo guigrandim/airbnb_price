@@ -4,6 +4,8 @@
 
 ## Objetivo
 
+Revisão V2 executada em15/11/2026 após exclusão autorizada do ID20644162: recomendar36features, gate pendente. Ver [plano e evidências05V2](plano-etapa-05-v2-feature-selection.md). Resultados abaixo pertencem ao fluxo histórico.
+
 Identificar um subconjunto estável das preditoras de preço e verificar se ele melhora ou preserva o MAPE na validação.
 
 ## Escopo e base

@@ -4,6 +4,8 @@
 
 **Objetivo:** descrever os anúncios de treino, investigar cinco relações de negócio com `price` e avaliar redundância entre preditoras.
 
+Revisão V2 executada em 15/11/2026: população ampliada, cinco hipóteses, heatmaps e triagem contextual de preços. Ver [plano e resultados V2](plano-revisao-etapas-02-04-03.md). O conteúdo abaixo registra o baseline histórico; gate V2 pendente.
+
 **Escopo:** usar `df_modeling_features` apenas onde `particao == "treino"` para a EDA. A validação e o teste ficam fora da análise. Investigar outliers e recomendar retenção/remoção; qualquer exclusão do conjunto de modelagem exige evidência, decisão explícita e fallback.
 
 **Base de entrada:** antes da exclusão autorizada, `df_modeling_features` tinha 14.806 linhas e 45 colunas: 12.187 anúncios de treino e 2.619 de validação. O teste permaneceu reservado; a EDA não leu seus valores.

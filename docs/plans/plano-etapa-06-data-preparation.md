@@ -4,6 +4,8 @@
 
 ## Objetivo
 
+Revisão V2 executada em15/11/2026 com36features e130colunas transformadas. Ver [plano e evidências06V2](plano-etapa-06-v2-data-preparation.md). O conteúdo abaixo registra o fluxo histórico.
+
 Preparar transformações reproduzíveis para as 40 features recomendadas na Etapa 05, sem ajustar transformadores fora do treino e sem consultar o teste.
 
 ## Escopo e premissas

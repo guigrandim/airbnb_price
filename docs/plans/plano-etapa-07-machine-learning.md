@@ -4,6 +4,8 @@
 
 ## Objetivo
 
+Revisão V2 executada em15/11/2026 com36features e população ampliada. XGBoost eLightGBM recomendados para08V2, gate pendente. Ver [plano e resultados07V2](plano-etapa-07-v2-machine-learning.md). As métricas abaixo descrevem o fluxo histórico.
+
 Treinar e comparar modelos de regressão para estimar o preço em Amsterdam, escolhendo candidatos para tuning sem consultar o conjunto de teste.
 
 ## Escopo e premissas

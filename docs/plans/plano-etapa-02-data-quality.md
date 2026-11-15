@@ -2,6 +2,8 @@
 
 ## Objetivo
 
+Revisão V2 autorizada e executada em 15/11/2026: ausências preservadas e cobertura ampliada. Ver [plano e resultados V2](plano-revisao-etapas-02-04-03.md). O conteúdo abaixo registra o baseline histórico; gate V2 pendente.
+
 Auditar o snapshot e montar em memória uma base de desenvolvimento com uma linha por anúncio. Manter o teste bruto reservado para a avaliação final.
 
 ## Fonte, seleção e partição

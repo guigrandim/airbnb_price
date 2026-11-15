@@ -4,6 +4,8 @@
 
 ## Objetivo e base de entrada
 
+Revisão V2 executada em 15/11/2026 sobre base ampliada e com comparação de blocos em CV do treino. Candidato: 36 features; gate pendente. Ver [plano e resultados V2](plano-revisao-etapas-02-04-03.md). O conteúdo abaixo registra o baseline histórico.
+
 Criar atributos interpretáveis sobre capacidade, anfitrião, reputação, localização e restrições de estadia, sem alterar a base da Etapa 02 nem consultar o teste reservado.
 
 `df_modeling_final` tem 14.806 linhas e 23 colunas: `id`, `price`, 20 preditoras e `particao`. São 12.187 anúncios de treino e 2.619 de validação. `df_test_raw.csv` permanece bruto, com 3.005 linhas e 96 colunas.

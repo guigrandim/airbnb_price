@@ -1,8 +1,10 @@
 # Etapa 09 — Métricas e Recomendador
 
-**Status:** execução concluída em 10/11/2026; aguardando aprovação do gate.
+**Status:** execução concluída; gate aprovado pelo usuário em 12/11/2026; Etapa 10 autorizada.
 
 ## Objetivo
+
+O registro abaixo preserva a execução histórica. A reavaliação após a auditoria dos dados está em [Etapa 09 V2](plano-etapa-09-v2-metricas-recomendador.md), com população ampliada, 36 features e limitações de independência do teste documentadas.
 
 Retreinar o LightGBM ajustado da Etapa 08 em treino + validação, avaliar uma vez no teste independente e produzir em memória preços de referência, diferenças para o preço anunciado e faixas empíricas de incerteza.
 
@@ -49,7 +51,7 @@ Cada bloco será desenvolvido e executado via MCP em 1–3 células, com inspeç
 
 ## Gate
 
-**Estado:** Etapa 09 concluída; aprovação do usuário pendente. A Etapa 10 não foi iniciada.
+**Estado:** aprovada pelo usuário em 12/11/2026; Etapa 10 autorizada.
 
 ## Evidências e decisões da execução
 
@@ -64,3 +66,4 @@ Cada bloco será desenvolvido e executado via MCP em 1–3 células, com inspeç
 - Uma saída bruta do modelo foi negativa. Ela permanece nas métricas e é limitada a €0 somente no preço de referência da tabela, com indicador. `df_price_recommendations` tem 2.562 linhas e permanece em memória; não houve exportação.
 - SHA-256 do teste antes e depois: `12b7dada5382fdc869754a1abfaf067c5385fd8088bdf56de3bf8764080d1178`; igual nos dois momentos.
 - Limitação: a avaliação cobre casos completos após as regras de qualidade; não demonstra preço ótimo, causalidade ou receita incremental realizada.
+- Após a aprovação da Etapa 09, o kernel perdeu as previsões e recomendações mantidas apenas em memória. Em 12/11/2026, o usuário autorizou executar novamente o notebook inteiro para recuperar esses objetos. A reprodução deve usar as células, features, parâmetros e regras aprovados, conferir as métricas salvas e proteger o arquivo bruto do teste pelo SHA-256 acima; não autoriza retuning nem mudança da avaliação aprovada.

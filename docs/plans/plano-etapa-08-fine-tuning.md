@@ -4,6 +4,8 @@
 
 ## Objetivo
 
+Revisão V2 executada em15/11/2026 com36features e população ampliada. LightGBM ajustado recomendado para09V2,gate pendente. Ver [plano e resultados08V2](plano-etapa-08-v2-fine-tuning.md). O conteúdo abaixo registra a execução histórica.
+
 Ajustar LightGBM e XGBoost, os dois candidatos aprovados na Etapa 07, com busca bayesiana via Optuna e comparar o resultado com as configurações fixas já avaliadas.
 
 ## Escopo e premissas
