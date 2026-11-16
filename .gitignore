@@ -1,6 +1,9 @@
 # Data
 /data/
 
+# Instruções locais do projeto
+/AGENTS.md
+
 # Mac OS-specific storage files
 .DS_Store
 
