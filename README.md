@@ -11,6 +11,8 @@ Usei Streamlit na aplicação e LightGBM na previsão. Os dados são de dezembro
 ![LightGBM](https://img.shields.io/badge/Modelo-LightGBM-29804A)
 ![Licença](https://img.shields.io/badge/licença-MIT-green)
 
+🔗 **Aplicativo em produção:** [airbnbprice.streamlit.app](https://airbnbprice.streamlit.app/)
+
 <p align="center">
 <img src="./assets/amsterdam-night.png" alt="Ilustração fotográfica de Amsterdam ao anoitecer, gerada com IA para o cabeçalho do simulador" width="800">
 </p>
