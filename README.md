@@ -1,6 +1,10 @@
-# 🏘️ Airbnb Amsterdam — Referência de Preços de Diárias
+# 🏘️ Airbnb Amsterdam — Comparador de Diárias com Machine Learning
 
-Modelo de machine learning e simulador em Streamlit para comparar o preço informado de uma acomodação com uma referência baseada em anúncios de Amsterdam de dezembro de 2018.
+Criei um simulador para ajudar quem procura hospedagem em Amsterdam a comparar o preço de uma diária com o valor estimado para aquele imóvel.
+
+Você informa o bairro, as características da acomodação e a diária anunciada. O resultado mostra a referência calculada pelo modelo e a diferença em euros por noite. Um gráfico coloca os dois preços lado a lado.
+
+Usei Streamlit na aplicação e LightGBM na previsão. Os dados são de dezembro de 2018, portanto a consulta demonstra a comparação de preços daquela base histórica.
 
 ![Python](https://img.shields.io/badge/Python-3.11–3.13-3776AB?logo=python&logoColor=white)
 ![Streamlit](https://img.shields.io/badge/Streamlit-1.67-FF4B4B?logo=streamlit&logoColor=white)
@@ -13,28 +17,26 @@ Modelo de machine learning e simulador em Streamlit para comparar o preço infor
 
 ### 🎯 Destaques
 
-- Desenvolvi um pipeline LightGBM com **36 features**, com MAPE de **25,98%** e MAE de **€ 38,95** na avaliação histórica de **3.005 anúncios**.
-- Entreguei um simulador que compara o preço informado com a referência estimada, apresenta a diferença em euros e usa um gráfico de duas barras para facilitar a leitura.
-- Integrei localização por **22 bairros**, com coordenadas aproximadas preenchidas automaticamente a partir dos limites geográficos oficiais do dataset.
-- Documentei o processo em **11 etapas**, incluindo qualidade dos dados, seleção de atributos, tuning, incerteza e cenários econômicos.
+- O simulador mostra se a diária está abaixo, perto ou acima da referência. A localização é preenchida automaticamente pela escolha do bairro.
+- Comparei sete estimadores e escolhi o LightGBM após o ajuste de hiperparâmetros. Com 36 features, ele atingiu MAPE de **25,98%** e MAE de **€ 38,95** em 3.005 anúncios.
+- Na análise econômica de 20.026 anúncios, substituir os preços anunciados pelas referências resultou em **+€ 2,05 milhões (+1,75%) de volume bruto anual projetado**, mantendo as mesmas noites estimadas.
+- Registrei o desenvolvimento e as decisões em 11 etapas.
 
 ---
 
 ## 🚨 Problema de Negócio
 
-Anfitriões e hóspedes precisam avaliar como o preço de uma diária se posiciona em relação a acomodações com características semelhantes. Capacidade, localização, tipo de imóvel e histórico de avaliações tornam essa comparação difícil quando feita apenas olhando anúncios individuais.
+Uma diária pode parecer barata até que se considere o bairro, o espaço disponível e a capacidade do imóvel. Essas diferenças dificultam a escolha entre anúncios.
 
-O projeto explora esse problema no contexto de Host Growth, usando dados públicos do Inside Airbnb e uma aplicação de consulta para tornar a comparação acessível.
+Usei os dados públicos do Inside Airbnb para investigar quanto essas características ajudam a estimar o preço anunciado. O projeto começou no contexto de Host Growth e chegou a uma aplicação de consulta para anfitriões e hóspedes.
 
-**Pergunta central** — Qual preço de referência o modelo estima para um anúncio de Amsterdam a partir das características disponíveis?
-
-**Minha tarefa** — Conduzir o processo de ciência de dados, avaliar modelos de regressão e transformar o pipeline treinado em um simulador de comparação de preços.
+Fiquei responsável pela preparação dos dados, comparação dos modelos e construção do simulador. A pergunta que orientou o trabalho foi quanto deveria ser a referência de diária para um anúncio com aquelas características.
 
 ---
 
 ## 🗺️ Planejamento da Solução
 
-O desenvolvimento seguiu um fluxo adaptado de **CRISP-DM**, com planos e decisões registrados por etapa.
+Organizei o trabalho em 11 etapas, seguindo uma adaptação do CRISP-DM.
 
 1. Definição do problema preditivo e do snapshot.
 2. Auditoria e limpeza dos dados, integração de fontes e congelamento das partições.
@@ -50,7 +52,7 @@ O desenvolvimento seguiu um fluxo adaptado de **CRISP-DM**, com planos e decisõ
 
 Os registros completos estão em [docs/plans](./docs/plans).
 
-**Ferramentas utilizadas** — Python, pandas, NumPy, SciPy, matplotlib, scikit-learn, Boruta, XGBoost, LightGBM, Optuna, Altair, JupyterLab e Streamlit.
+Usei Python com pandas, NumPy, SciPy e matplotlib na análise, scikit-learn, Boruta, XGBoost, LightGBM e Optuna na modelagem, e Streamlit com Altair na aplicação. O desenvolvimento analítico está no JupyterLab.
 
 ---
 
@@ -70,22 +72,48 @@ Os registros completos estão em [docs/plans](./docs/plans).
 | Desenvolvimento final | 17.021 anúncios |
 | Avaliação histórica | 3.005 anúncios |
 
-O calendário diário foi excluído da construção da base de modelagem para preservar a granularidade por anúncio. As avaliações auxiliares foram agregadas por imóvel. O teste bruto foi preservado em disco, e os tratamentos aprendidos foram limitados ao desenvolvimento.
+Mantive uma linha por anúncio e agreguei as avaliações por imóvel. Por isso, o calendário diário ficou fora da base de modelagem. Preservei o teste bruto em disco e ajustei os tratamentos dos dados apenas no conjunto de desenvolvimento.
 
 ### Modelagem e Fine Tuning
 
-Foram avaliados baselines, regressão linear e polinomial, Random Forest, XGBoost e LightGBM. A seleção incluiu análise de estabilidade das features e comparação de subconjuntos.
+Comparei sete estimadores com as mesmas 36 features, usando 14.018 anúncios para treino e 3.003 para validação. O pré-processamento foi ajustado no treino. Também verifiquei a estabilidade das features e comparei diferentes subconjuntos de atributos.
 
-A tabela apresenta as configurações finalistas documentadas na Etapa 08 V2.
+#### Comparação inicial
 
-| Configuração | MAPE em validação | MAE em validação |
-|---|---:|---:|
-| LightGBM fixo | 29,43% | € 43,91 |
-| LightGBM ajustado | **27,77%** | **€ 41,68** |
-| XGBoost fixo | 29,12% | € 43,39 |
-| XGBoost ajustado | 28,13% | € 42,43 |
+| Modelo | MAPE em validação | MAE | RMSE |
+|---|---:|---:|---:|
+| DummyRegressor com média | 49,04% | € 63,01 | € 191,56 |
+| DummyRegressor com mediana | 38,22% | € 59,42 | € 193,47 |
+| Regressão linear | 31,91% | € 46,26 | € 178,91 |
+| Regressão polinomial de grau 2 | 33,44% | € 47,73 | € 182,73 |
+| Random Forest | 29,81% | € 44,16 | € 177,20 |
+| XGBoost | **29,12%** | **€ 43,39** | € 178,99 |
+| LightGBM | 29,43% | € 43,91 | **€ 174,54** |
 
-O LightGBM ajustado foi escolhido pelo MAPE global e pelo MAE na validação. A busca utilizou Optuna, com orçamento de 20 trials por algoritmo finalista. O pipeline foi ajustado no conjunto de desenvolvimento e persistido com o esquema de entrada e metadados necessários à inferência.
+Comecei com duas referências simples, prevendo a média ou a mediana para todos os anúncios. A regressão linear reduziu o erro, mas acrescentar termos polinomiais piorou o MAPE. Os menores erros percentuais vieram dos modelos de árvores.
+
+XGBoost e LightGBM seguiram para o tuning. O XGBoost teve o menor MAPE inicial, e o LightGBM teve o menor RMSE e menor diferença de MAPE entre treino e validação. O ajuste levou 5,02 segundos para XGBoost e 2,12 segundos para LightGBM, frente a 60,76 segundos para Random Forest no ambiente do projeto.
+
+#### Ajuste dos finalistas
+
+Usei Optuna com amostrador TPE, 20 trials por algoritmo e validação cruzada de três folds no treino. Cada fold ajustou o pipeline completo, incluindo o pré-processamento.
+
+| Configuração | MAPE em validação cruzada | MAPE em validação | MAE em validação | RMSE em validação |
+|---|---:|---:|---:|---:|
+| LightGBM fixo | 28,54% | 29,43% | € 43,91 | € 174,54 |
+| LightGBM ajustado | **27,16%** | **27,77%** | **€ 41,68** | **€ 173,94** |
+| XGBoost fixo | 27,85% | 29,12% | € 43,39 | € 178,99 |
+| XGBoost ajustado | 27,74% | 28,13% | € 42,43 | € 176,15 |
+
+O tuning reduziu o MAPE de validação do LightGBM em **1,66 ponto percentual** e o MAE em **€ 2,23**. No XGBoost, a redução foi de **1,00 ponto percentual** e **€ 0,97**. Após o ajuste, o LightGBM apresentou os menores MAPE, MAE e RMSE globais entre os finalistas e foi escolhido para a aplicação.
+
+#### Modelo final
+
+Com a configuração escolhida, ajustei o LightGBM nos **17.021 anúncios de desenvolvimento** e avaliei o pipeline nos **3.005 anúncios do teste histórico**. O resultado foi **MAPE de 25,98%**, **MAE de € 38,95** e **RMSE de € 105,32**. Essas métricas pertencem a uma população diferente da validação usada para escolher os modelos.
+
+Salvei o pipeline treinado com o esquema de entrada e os metadados usados na inferência. A aplicação carrega esse artefato para calcular as referências de preço.
+
+As comparações completas estão nos planos das [Etapas 07 V2](./docs/plans/plano-etapa-07-v2-machine-learning.md), [08 V2](./docs/plans/plano-etapa-08-v2-fine-tuning.md) e [09 V2](./docs/plans/plano-etapa-09-v2-metricas-recomendador.md).
 
 ### Funcionalidades do Simulador
 
@@ -151,7 +179,7 @@ O desenvolvimento está no notebook [price_prediction.ipynb](./notebooks/price_p
 
 ### 1. O histórico de avaliações muda a qualidade da estimativa
 
-O MAPE foi de **24,27%** nos anúncios com histórico auxiliar e **37,18%** nos anúncios sem histórico. Esse resultado orienta o cuidado necessário ao interpretar referências para imóveis com pouca informação disponível.
+O MAPE foi de **24,27%** nos anúncios com histórico auxiliar e **37,18%** nos anúncios sem histórico. As estimativas para imóveis com pouca informação exigem mais cuidado.
 
 ### 2. O erro varia conforme o tipo de acomodação
 
@@ -159,7 +187,7 @@ Anúncios de espaço inteiro tiveram MAPE de **24,25%**, enquanto quartos privat
 
 ### 3. A faixa global perde cobertura nos imóveis mais caros
 
-A faixa empírica alcançou cobertura global de **90,72%**, mas apenas **74,18%** no quartil de maior preço. A avaliação por segmento revelou uma limitação que a métrica agregada esconderia.
+A faixa empírica incluiu o preço anunciado em **90,72%** dos casos. Entre os 25% de imóveis mais caros, essa cobertura caiu para **74,18%**.
 
 As evidências estão no [plano da Etapa 09 V2](./docs/plans/plano-etapa-09-v2-metricas-recomendador.md).
 
@@ -180,17 +208,32 @@ As evidências estão no [plano da Etapa 09 V2](./docs/plans/plano-etapa-09-v2-m
 
 O MAPE é o erro percentual absoluto médio em relação ao preço anunciado. O MAE expressa a diferença absoluta média em euros por noite.
 
-### Resultado da Entrega
+### O que foi entregue
 
-A aplicação permite consultar o modelo por formulário e entender a diferença entre a diária informada e a referência calculada. O usuário escolhe o bairro e preenche as características conhecidas, recebe a previsão e visualiza a comparação em um gráfico simples.
+Uma aplicação em que o usuário consegue comparar a diária de um anúncio com a referência do modelo antes de escolher uma acomodação. Ela mostra a diferença em euros e sinaliza quando vale pesquisar outras opções na base de Amsterdam de dezembro de 2018.
 
-O pipeline persistido reúne o modelo treinado e as transformações necessárias para reproduzir a inferência. Os testes do projeto cobrem o contrato das features, validações de entrada e o fluxo de comparação na interface.
+O modelo e as transformações ficam salvos no mesmo pipeline. Os testes conferem o esquema das features, as entradas do formulário e o resultado exibido na interface.
+
+### Retorno do projeto e resultado econômico projetado
+
+Na análise de 20.026 anúncios, a aplicação das referências de preço às noites estimadas produziu um cenário anual de **€ 119,27 milhões em volume bruto de reservas**, frente a **€ 117,22 milhões** com os preços anunciados. A diferença projetada foi de **+€ 2,05 milhões**, mantendo constantes as noites estimadas.
+
+| Indicador de negócio | Resultado do projeto |
+|---|---|
+| População analisada | 20.026 anúncios |
+| Diferença anual projetada no volume bruto | +€ 2.053.631,79 |
+| Variação sobre o volume bruto inicial | +1,75% |
+| Decisão apoiada para o hóspede | Comparar a diária com uma referência e identificar preços acima ou abaixo dela |
+
+Esse cenário mede a diferença de volume bruto ao trocar os preços anunciados pelas referências do modelo. Para calcular o ROI percentual, ainda é preciso incorporar a receita incremental da plataforma e os custos do projeto.
+
+Os cálculos estão no [plano da Etapa 10 V2](./docs/plans/plano-etapa-10-v2-resultado-economico-final.md).
 
 ---
 
 ## ✅ Conclusões
 
-O projeto conecta a análise de dados de anúncios a um simulador de referência de diárias, com métricas globais, avaliação por segmento e documentação das decisões. A entrega permite explorar a resposta do modelo às características de uma acomodação e interpretar o preço informado dentro do contexto histórico utilizado.
+O LightGBM foi a escolha final depois da comparação com os outros modelos e do tuning. A análise por segmento mostrou maior erro nos anúncios sem histórico e menor cobertura da faixa de referência nos imóveis caros. Esses resultados orientam as próximas revisões do modelo.
 
 **Limitações**
 
