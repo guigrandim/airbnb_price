@@ -1,27 +1,9 @@
-loguru
-mkdocs
-pip
-python-dotenv
-ruff
-tqdm
-typer
-# Dependências usadas para construir e manipular o dataset no notebook.
+﻿# Runtime do simulador no Streamlit Community Cloud.
 numpy==2.2.6
 pandas==2.3.3
-matplotlib==3.10.9
 scipy==1.15.3
 scikit-learn==1.7.2
-xgboost==3.2.0
 lightgbm==4.7.0
-Boruta==0.4.3
-optuna==5.0.0
 streamlit==1.67.0
-# JupyterLab, kernel and MCP tools used for incremental notebook work.
-jupyterlab==4.6.4
-ipykernel==7.2.0
-jupyter-server-mcp==0.4.0
-jupyterlab-commands-toolkit[mcp]==0.3.0
-jupyterlab-ai-commands==0.4.0
-jupyterlab-diff==0.7.1
-fastmcp==4.1.0
+altair==6.3.0
 -e .

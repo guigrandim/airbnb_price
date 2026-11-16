@@ -112,3 +112,7 @@ Implementado fluxo único com preço obrigatório positivo, mensagens nas cinco 
 Solicitado pelo usuário. Lista suspensa com os 22 bairros do GeoJSON bruto. Coordenadas aproximadas por centroide geométrico dos polígonos, ponderado por área e descontando anéis internos, calculado em longitude/latitude. Catálogo local assets/amsterdam-neighbourhoods.json. Coordenadas alimentam a inferência automaticamente. Avisar na interface que a posição é aproximada. Critérios de aceite incluem lista sem texto livre, ausência de campos de coordenadas, domínio geográfico e envio bem sucedido ao modelo.
 
 Implementação concluída. Catálogo validado com 22 bairros e coordenadas no domínio de Amsterdam. Teste do app cobre lista, ausência de campos de coordenadas e previsão após selecionar Bijlmer-Oost. Sete testes aprovados. A posição aproximada pode alterar a distância ao centro e a previsão em relação ao endereço exato.
+
+## Correção de publicação no Community Cloud
+
+Log fornecido pelo usuário confirmou Python 3.14.10 e falha de compilação do SciPy 1.15.3 por ausência de Fortran. Projeto suporta Python >=3.11,<3.14. Publicar com Python 3.13 em Advanced settings. Requirements de execução reduzido para numpy, pandas, scipy, scikit-learn, lightgbm, streamlit, altair e pacote local. Ambiente completo preservado em requirements-dev.txt. Carga local do pickle com imports levou 7,27 segundos. Publicação remota aguarda seleção de Python compatível no painel e envio das alterações.

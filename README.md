@@ -168,8 +168,13 @@ Abra o endereço informado no terminal, normalmente `http://localhost:8501`. O s
 Para abrir o ambiente de análise com os dados disponíveis localmente, execute o JupyterLab.
 
 ```powershell
+.\.venv\Scripts\python.exe -m pip install -r requirements-dev.txt
 .\.venv\Scripts\python.exe -m jupyter lab
 ```
+
+Para publicar no Streamlit Community Cloud, use o branch `main`, o arquivo `app.py` e Python **3.13**, selecionado em **Advanced settings** ao criar o app. O `requirements.txt` instala as dependências do simulador. O ambiente completo de análise está em `requirements-dev.txt`.
+
+Se o app já foi criado com Python 3.14, recrie o deploy selecionando Python 3.13. Essa escolha é feita no painel do Community Cloud.
 
 O desenvolvimento está no notebook [price_prediction.ipynb](./notebooks/price_prediction.ipynb).
 
