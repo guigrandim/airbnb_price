@@ -1,4 +1,4 @@
-# 🏘️ Airbnb Amsterdam — Comparador de Diárias com Machine Learning
+# 🏘️ Airbnb Amsterdam — Estimativa de Preços por Diária com Machine Learning
 
 Criei um simulador para ajudar quem procura hospedagem em Amsterdam a comparar o preço de uma diária com o valor estimado para aquele imóvel.
 
