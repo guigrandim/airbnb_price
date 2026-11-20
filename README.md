@@ -20,7 +20,7 @@ Usei Streamlit na aplicação e LightGBM na previsão. Os dados são de dezembro
 ### 🎯 Destaques
 
 - O simulador mostra se a diária está abaixo, perto ou acima da referência. A localização é preenchida automaticamente pela escolha do bairro.
-- Comparei sete estimadores e escolhi o LightGBM após o ajuste de hiperparâmetros. Com 36 features, ele atingiu MAPE de **25,98%** e MAE de **€ 38,95** em 3.005 anúncios.
+- O LightGBM final usa 36 variáveis e perda absoluta sem pesos. Em validação cruzada com 17.021 anúncios, obteve **23,30% de MAPE** e **€ 37,57 de MAE**.
 - Na análise econômica de 20.026 anúncios, substituir os preços anunciados pelas referências resultou em **+€ 2,05 milhões (+1,75%) de volume bruto anual projetado**, mantendo as mesmas noites estimadas.
 - Registrei o desenvolvimento e as decisões em 11 etapas.
 
@@ -107,11 +107,11 @@ Usei Optuna com amostrador TPE, 20 trials por algoritmo e validação cruzada de
 | XGBoost fixo | 27,85% | 29,12% | € 43,39 | € 178,99 |
 | XGBoost ajustado | 27,74% | 28,13% | € 42,43 | € 176,15 |
 
-O tuning reduziu o MAPE de validação do LightGBM em **1,66 ponto percentual** e o MAE em **€ 2,23**. No XGBoost, a redução foi de **1,00 ponto percentual** e **€ 0,97**. Após o ajuste, o LightGBM apresentou os menores MAPE, MAE e RMSE globais entre os finalistas e foi escolhido para a aplicação.
+O tuning reduziu o MAPE de validação do LightGBM em **1,66 ponto percentual** e o MAE em **€ 2,23**. No XGBoost, a redução foi de **1,00 ponto percentual** e **€ 0,97**. Após o ajuste, o LightGBM apresentou os menores MAPE, MAE e RMSE globais entre os finalistas e passou a ser a referência V2.
 
 #### Modelo final
 
-Com a configuração escolhida, ajustei o LightGBM nos **17.021 anúncios de desenvolvimento** e avaliei o pipeline nos **3.005 anúncios do teste histórico**. O resultado foi **MAPE de 25,98%**, **MAE de € 38,95** e **RMSE de € 105,32**. Essas métricas pertencem a uma população diferente da validação usada para escolher os modelos.
+Na avaliação original do V2, ajustei o LightGBM nos **17.021 anúncios de desenvolvimento** e avaliei o pipeline nos **3.005 anúncios do teste histórico**. O V2 obteve **25,98% de MAPE**, **€ 38,95 de MAE** e **€ 105,32 de RMSE** nesse teste.
 
 Salvei o pipeline treinado com o esquema de entrada e os metadados usados na inferência. A aplicação carrega esse artefato para calcular as referências de preço.
 
@@ -139,7 +139,8 @@ airbnb_price/
 ├── data/                             # Dados brutos e partições
 ├── docs/plans/                       # Planos e evidências por etapa
 ├── models/
-│   └── airbnb_amsterdam_price_v2.pkl  # Pipeline treinado e metadados
+│   ├── airbnb_amsterdam_price_l1.pkl  # Pipeline usado pelo aplicativo
+│   └── airbnb_amsterdam_price_v2.pkl  # Pipeline histórico
 ├── notebooks/
 │   └── price_prediction.ipynb         # Desenvolvimento analítico
 ├── src/modeling/
@@ -202,7 +203,13 @@ As evidências estão no [plano da Etapa 09 V2](./docs/plans/plano-etapa-09-v2-m
 
 ## 📊 Resultados
 
-### Avaliação Histórica do Modelo Final
+### Modelo final usado no aplicativo
+
+Mantive as 36 variáveis e troquei o objetivo do LightGBM por perda absoluta sem pesos. Na comparação com os mesmos cinco folds, o MAPE caiu de **27,17% para 23,30%** e o MAE de **€ 39,60 para € 37,57**. Acima de € 175, o MAPE passou de 23,62% para 24,53%. O peso intermediário atingiu 22,42% de MAPE global, com MAE de € 38,81 e MAPE de 27,42% acima de € 175.
+
+O pickle do aplicativo foi ajustado nos 17.021 anúncios de desenvolvimento. A faixa empírica usa quantis dos resíduos fora do fold do próprio L1. As métricas do L1 são de validação cruzada no desenvolvimento. [Comparação e critérios de escolha](./docs/plans/plano-etapa-14-tres-alternativas-mape.md).
+
+### Avaliação histórica do V2
 
 | Indicador | Resultado |
 |---|---:|
@@ -223,7 +230,7 @@ O modelo e as transformações ficam salvos no mesmo pipeline. Os testes confere
 
 ### Retorno do projeto e resultado econômico projetado
 
-Na análise de 20.026 anúncios, a aplicação das referências de preço às noites estimadas produziu um cenário anual de **€ 119,27 milhões em volume bruto de reservas**, frente a **€ 117,22 milhões** com os preços anunciados. A diferença projetada foi de **+€ 2,05 milhões**, mantendo constantes as noites estimadas.
+Na análise histórica do V2 com 20.026 anúncios, a aplicação das referências de preço às noites estimadas produziu um cenário anual de **€ 119,27 milhões em volume bruto de reservas**, frente a **€ 117,22 milhões** com os preços anunciados. A diferença projetada foi de **+€ 2,05 milhões**, mantendo constantes as noites estimadas.
 
 | Indicador de negócio | Resultado do projeto |
 |---|---|
@@ -240,7 +247,7 @@ Os cálculos estão no [plano da Etapa 10 V2](./docs/plans/plano-etapa-10-v2-res
 
 ## ✅ Conclusões
 
-O LightGBM foi a escolha final depois da comparação com os outros modelos e do tuning. A análise por segmento mostrou maior erro nos anúncios sem histórico e menor cobertura da faixa de referência nos imóveis caros. Esses resultados orientam as próximas revisões do modelo.
+O aplicativo usa LightGBM com perda absoluta sem pesos. A escolha reduziu o erro percentual e o erro absoluto médio na validação cruzada do desenvolvimento, com pequena piora no MAPE das diárias acima de € 175 frente ao V2.
 
 **Limitações**
 

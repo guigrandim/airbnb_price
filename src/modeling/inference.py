@@ -248,7 +248,10 @@ def load_artifact(path: str | Path) -> dict[str, Any]:
     if not isinstance(artifact, dict) or not {"pipeline", "manifest"} <= set(artifact):
         raise ValueError("O pickle não contém pipeline e manifesto do modelo.")
     manifest = artifact["manifest"]
-    if manifest.get("artifact_version") != "airbnb_amsterdam_price_v2":
+    if manifest.get("artifact_version") not in {
+        "airbnb_amsterdam_price_v2",
+        "airbnb_amsterdam_price_l1",
+    }:
         raise ValueError("Versão de artefato incompatível com o aplicativo.")
     if manifest.get("features") != FEATURE_COLUMNS:
         raise ValueError("A ordem de features no artefato não é compatível.")

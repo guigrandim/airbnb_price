@@ -9,7 +9,7 @@ from modeling.inference import load_artifact, predict_reference
 
 
 ROOT_DIR = Path(__file__).resolve().parent
-ARTIFACT_PATH = ROOT_DIR / "models" / "airbnb_amsterdam_price_v2.pkl"
+ARTIFACT_PATH = ROOT_DIR / "models" / "airbnb_amsterdam_price_l1.pkl"
 
 
 @st.cache_resource(show_spinner=False)
@@ -99,7 +99,7 @@ except (ValueError, RuntimeError, AttributeError, ImportError) as error:
 
 
 with st.expander("Sobre esta estimativa"):
-    st.write("LightGBM V2 | 36 atributos | MAPE historico 25,98%. Demonstracao retrospectiva com dados de 2018. Faixa empirica com cobertura variavel entre segmentos.")
+    st.write("LightGBM com perda absoluta | 36 atributos | MAPE de 23,30% em validação cruzada no desenvolvimento. Demonstração retrospectiva com dados de 2018.")
 with st.container(border=True):
     st.subheader("Seu imóvel")
     st.caption("Preencha o que souber. Você pode deixar os campos opcionais em branco.")
